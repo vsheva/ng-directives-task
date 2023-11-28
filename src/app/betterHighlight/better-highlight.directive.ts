@@ -1,24 +1,40 @@
-import {Directive, OnInit, Renderer2, ElementRef, HostListener} from '@angular/core';
+import {
+  Directive,
+  OnInit,
+  Renderer2,
+  ElementRef,
+  HostListener,
+  HostBinding, Input
+} from '@angular/core';
 
 @Directive({
   selector: '[appBetterHighlight]'
 })
-export class BetterHighlightDirective implements OnInit{
 
 
-  constructor(private elRef: ElementRef, private renderera:Renderer2) { }
+export class BetterHighlightDirective implements OnInit {
+  @Input() defaultColor: string = "transparent";
+  //@Input() highlightColor: string = "green";
+  @Input("highlightColor") highlightColor: string = "green";
 
-  ngOnInit() {
-   //this.renderera.setStyle(this.elRef.nativeElement, "background-color", "gold")
+  @HostBinding("style.backgroundColor") backgroundColor: string;
+
+  constructor(private elRef: ElementRef, private renderera: Renderer2) {
   }
 
-  @HostListener("mouseenter") //event
-  mouseover(eventData: Event) {
-    this.renderera.setStyle(this.elRef.nativeElement, "background-color", "gold")
+  ngOnInit() {
+    //this.renderera.setStyle(this.elRef.nativeElement, "background-color", "gold")
+    this.backgroundColor = this.defaultColor
+  }
+
+  @HostListener("mouseenter") /*event*/ mouseover(eventData: Event) {
+    //this.renderera.setStyle(this.elRef.nativeElement, "background-color", "gold")
+    this.backgroundColor = this.highlightColor
   }
 
   @HostListener("mouseleave") mouseleave(eventData: Event) {
-    this.renderera.setStyle(this.elRef.nativeElement, "background-color", "transparent")
+    //this.renderera.setStyle(this.elRef.nativeElement, "background-color", "transparent")
+    this.backgroundColor = this.defaultColor
   }
 
 }
