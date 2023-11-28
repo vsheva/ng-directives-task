@@ -59,6 +59,15 @@
       <!--      <p [highlightColor]="'pink'" appBetterHighlight [defaultColor]="'yellow'"  >Change better Highlight with Custom Directive</p>-->
       <p [highlightColor]="'pink'" appBetterHighlight defaultColor='yellow'>Change better Highlight with Custom
         Directive</p>
+
+      <div [ngSwitch]="value">
+        <p *ngSwitchCase="1">Value 1</p>
+        <p *ngSwitchCase="5">Value 5</p>
+        <p *ngSwitchDefault="30">Value 30</p>
+        <p> Default Value</p>
+
+      </div>
+
       <ng-template [ngIf]="onlyOdd">
         <p>Only odd</p>
       </ng-template>
